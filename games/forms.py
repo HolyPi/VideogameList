@@ -7,3 +7,5 @@ class GameForm(forms.ModelForm):
         model = Game
         fields = ['title', 'price', 'img']
     
+    
+    

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+        <h3>Submit a game to your list!</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}

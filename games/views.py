@@ -1,10 +1,14 @@
-from django.http import HttpResponse 
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect 
 from .forms import *
 from .models import Game
 from django.views.generic.detail import DetailView
-from games.models import Game
-from games.forms import GameForm
+from django.views.generic import CreateView
+from django.views.generic.list import ListView
+from .models import Game
+from .forms import GameForm
+from django.urls import reverse_lazy
+from django.utils.text import slugify
 
 
 class GameListView(ListView):
@@ -12,36 +16,39 @@ class GameListView(ListView):
     model = Game
 
     def get(self, request):
-        """ GET a list of Pages. """
-        pages = self.get_queryset().all()
-        return render(request, 'home.html', {
-          'pages': pages
+        """ GET a list of games. """
+        games = self.get_queryset().all()
+        return render(request, 'list.html', {
+          'games': games
         })
 
-class GameCreate(TemplateView):
-    template_name = 'templates/home.html'
-    
-    def get(self, request):
-        form = GameForm()
-        return render(request, self.template_name, {f'form': form})
-
-    def post(self, request):
-        form = GameForm(request.POST)
-        args = {title: 'title', price: 'price' }
-            
-        return render(request, self.template_name)
   
-class GameDetailsView(DetailView):
+class GameDetailView(DetailView):
     model = Game
 
     def get(self, request, slug):
-        page = self.get_queryset().get(slug__iexact=slug)
-        return render(request, 'page.html', {
-          'page': page
+        game = Game.objects.get(slug=slug)
+        return render(request, 'one_game.html', {
+          'game': game
         })
 
-def list(request):
-    return HttpResponse('Hello, this is list.')
+
+class GameCreateView(CreateView):
+    template_name = 'new_game.html'
+    form_class = GameForm
+    success_url = reverse_lazy('list-page')
+
+    def form_valid(self, *args, **kwargs):
+      
+        if not self.pk:
+            self.slug = slugify(self.title, allow_unicode=True)
+
+        # Call save on the superclass.
+        return super(Portfolio, self).save(*args, **kwargs)
+
+      
+
+
 
 # def Image_upload(request): 
   
