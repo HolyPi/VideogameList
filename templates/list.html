@@ -65,13 +65,12 @@
         <div class="hover">
         <img src="{{ game.image_url }}" alt="game-image">
 
-        <div class="text-right"><a href="{% url 'game-details-page' page.slug %}">{{ game.title }}</a></div> 
+        <div class="text-right"><a href="{{ game.slug }}">{{ game.title }}</a></div> 
        
     </div>
         </div>
         </div>
     </div> 
-</div>
 </div>
 {% endfor %}
 

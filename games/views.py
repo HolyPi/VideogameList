@@ -17,7 +17,7 @@ class GameListView(ListView):
 
     def get(self, request):
         """ GET a list of games. """
-        games = self.get_queryset().all()
+        games = Game.objects.all()
         return render(request, 'list.html', {
           'games': games
         })
@@ -43,8 +43,8 @@ class GameCreateView(CreateView):
         if not self.pk:
             self.slug = slugify(self.title, allow_unicode=True)
 
-        # Call save on the superclass.
-        return super(Portfolio, self).save(*args, **kwargs)
+  
+        return super(Game, self).save(*args, **kwargs)
 
       
 
