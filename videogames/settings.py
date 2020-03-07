@@ -25,7 +25,7 @@ SECRET_KEY = 'f9l)6gcmjc_(9_x*%yr6m^g&%qqh))p6khc*b2-uzs9)ish!f7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'videogamelist-jc.herokuapp.com']
 
 
 # Application definition
@@ -131,7 +131,7 @@ STATICFILES_DIRS = [
 ]
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 LOGIN_REDIRECT_URL = "/"

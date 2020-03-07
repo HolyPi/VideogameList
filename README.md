@@ -1,0 +1,1 @@
+** VideogameList is a place where you can add the title of videogames + their price and images. It has an authentication system and it was made with DJANGO. **
