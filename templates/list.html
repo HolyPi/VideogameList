@@ -14,8 +14,8 @@
             <div class="carousel-item active">
               <img src="https://www.geek.com/wp-content/uploads/2020/03/pokemon-mystery-dungeon-dx-625x352.png" class="d-block w-100" alt="...">
               <div class="carousel-caption d-none d-md-block">
-                <h5>New and upcoming games you should add to your list</h5>
-                <p>Pokemon Mystery Dungeon DX</p>
+                <h5 class="text-dark">New and upcoming games you should add to your list</h5>
+                <p class="text-dark">Pokemon Mystery Dungeon DX</p>
               </div>
             </div>
             <div class="carousel-item">
@@ -58,20 +58,17 @@
 
       {% if user.is_authenticated %}
       {% for game in games %}
-      <div class="row">
-      <div class="games"><div data-aos="zoom-in">
-        <div class="hover">
-          <div class="img-list">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
         <img src="{{ game.img }}" height="200px" width="300px" alt="game-image">
-      </div>
 
         <div class="title"><a href="{{ game.slug }}">{{ game.title }}</a></div> 
        
     </div>
         </div>
         </div>
-    </div> 
-</div>
+
 {% endfor %}
 
 {% else %}
