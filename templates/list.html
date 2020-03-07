@@ -59,13 +59,13 @@
       {% if user.is_authenticated %}
       {% for game in games %}
       <div class="row">
-        <div class="col-sm-4">
-            <div class="card" style="width: 18rem;">
       <div class="games"><div data-aos="zoom-in">
         <div class="hover">
-        <img src="{{ game.image_url }}" alt="game-image">
+          <div class="img-list">
+        <img src="{{ game.img }}" height="200px" width="300px" alt="game-image">
+      </div>
 
-        <div class="text-right"><a href="{{ game.slug }}">{{ game.title }}</a></div> 
+        <div class="title"><a href="{{ game.slug }}">{{ game.title }}</a></div> 
        
     </div>
         </div>

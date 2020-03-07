@@ -22,48 +22,32 @@ class GameListView(ListView):
           'games': games
         })
 
-  
+
+class GameCreateView(CreateView):
+  """ Renders a Create New Page Form """
+  template = 'new_game.html'
+  form_class = GameForm
+  success_url = '' 
+
+  def get(self, request):
+    form = GameForm()
+    return render(request, 'new_game.html', {'form': form})
+
+  def post(self, request):
+    if request.method == 'POST':
+      form = GameForm(request.POST)
+      if form.is_valid(): 
+        game = form.save()
+        return HttpResponseRedirect(reverse_lazy('game-details-page', args = [game.slug]))
+      return render(request, 'new_game.html', {'form': form})
+    
+
 class GameDetailView(DetailView):
     model = Game
 
+
     def get(self, request, slug):
-        game = Game.objects.get(slug=slug)
-        return render(request, 'one_game.html', {
-          'game': game
-        })
+        game = self.get_queryset().get(slug__iexact=slug)
+        return render(request, 'one_game.html', {'game': game})
 
 
-class GameCreateView(CreateView):
-    template_name = 'new_game.html'
-    form_class = GameForm
-    success_url = reverse_lazy('list-page')
-
-    def form_valid(self, *args, **kwargs):
-      
-        if not self.pk:
-            self.slug = slugify(self.title, allow_unicode=True)
-
-  
-        return super(Game, self).save(*args, **kwargs)
-
-      
-
-
-
-# def Image_upload(request): 
-  
-#     if request.method == 'POST': 
-#         form = GameForm(request.POST, request.FILES) 
-  
-#         if form.is_valid(): 
-#             form.save() 
-#             print(form.title)
-#             return redirect('success')
-#     else: 
-#         form = GameForm() 
-#     return render(request, 'game_img_form.html', {'form' : form}) 
-    
-  
-  
-# def success(request): 
-#     return HttpResponse('successfully uploaded')

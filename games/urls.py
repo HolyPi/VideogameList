@@ -1,7 +1,7 @@
 
 from django.urls import path 
 from .views import *
-from .views import GameListView, GameCreateView, GameDetailView
+from .views import GameDetailView, GameListView, GameCreateView
 
 
 urlpatterns = [
